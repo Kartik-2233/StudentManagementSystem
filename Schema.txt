@@ -1,0 +1,98 @@
+mysql> DESC attendance;
++---------------+--------------------------+------+-----+---------+----------------+
+| Field         | Type                     | Null | Key | Default | Extra          |
++---------------+--------------------------+------+-----+---------+----------------+
+| attendance_id | bigint                   | NO   | PRI | NULL    | auto_increment |
+| student_id    | bigint                   | NO   | MUL | NULL    |                |
+| class_id      | bigint                   | NO   | MUL | NULL    |                |
+| date          | date                     | NO   |     | NULL    |                |
+| status        | enum('Present','Absent') | YES  |     | Absent  |                |
++---------------+--------------------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> DESC classes;
++------------+-------------+------+-----+-------------------+-------------------+
+| Field      | Type        | Null | Key | Default           | Extra             |
++------------+-------------+------+-----+-------------------+-------------------+
+| class_id   | bigint      | NO   | PRI | NULL              | auto_increment    |
+| class_name | varchar(50) | NO   |     | NULL              |                   |
+| section    | varchar(5)  | YES  |     | NULL              |                   |
+| created_at | timestamp   | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
++------------+-------------+------+-----+-------------------+-------------------+
+4 rows in set (0.00 sec)
+
+mysql> DESC examresults;
+ERROR 1146 (42S02): Table 'school_management.examresults' doesn't exist
+mysql> DESC exams;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| exam_id   | bigint       | NO   | PRI | NULL    | auto_increment |
+| exam_name | varchar(100) | NO   |     | NULL    |                |
+| class_id  | bigint       | YES  | MUL | NULL    |                |
+| date      | date         | YES  |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> DESC fees;
++------------+--------------------+------+-----+---------+----------------+
+| Field      | Type               | Null | Key | Default | Extra          |
++------------+--------------------+------+-----+---------+----------------+
+| fee_id     | bigint             | NO   | PRI | NULL    | auto_increment |
+| student_id | bigint             | NO   | MUL | NULL    |                |
+| amount     | decimal(10,2)      | NO   |     | NULL    |                |
+| status     | enum('Paid','Due') | YES  |     | Due     |                |
+| due_date   | date               | YES  |     | NULL    |                |
+| paid_date  | date               | YES  |     | NULL    |                |
++------------+--------------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> DESC students;
++------------+--------------+------+-----+-------------------+-------------------+
+| Field      | Type         | Null | Key | Default           | Extra             |
++------------+--------------+------+-----+-------------------+-------------------+
+| student_id | bigint       | NO   | PRI | NULL              | auto_increment    |
+| name       | varchar(100) | NO   |     | NULL              |                   |
+| email      | varchar(100) | NO   | UNI | NULL              |                   |
+| phone      | varchar(15)  | YES  |     | NULL              |                   |
+| class_id   | bigint       | YES  |     | NULL              |                   |
+| dob        | date         | YES  |     | NULL              |                   |
+| address    | varchar(255) | YES  |     | NULL              |                   |
+| created_at | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
++------------+--------------+------+-----+-------------------+-------------------+
+8 rows in set (0.01 sec)
+
+mysql> DESC subjects;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| subject_id   | bigint       | NO   | PRI | NULL    | auto_increment |
+| subject_name | varchar(100) | NO   |     | NULL    |                |
+| class_id     | bigint       | YES  | MUL | NULL    |                |
+| teacher_id   | bigint       | YES  | MUL | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> DESC teachers;
++------------+--------------+------+-----+-------------------+-------------------+
+| Field      | Type         | Null | Key | Default           | Extra             |
++------------+--------------+------+-----+-------------------+-------------------+
+| teacher_id | bigint       | NO   | PRI | NULL              | auto_increment    |
+| name       | varchar(100) | NO   |     | NULL              |                   |
+| email      | varchar(100) | NO   | UNI | NULL              |                   |
+| phone      | varchar(15)  | YES  |     | NULL              |                   |
+| created_at | timestamp    | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
++------------+--------------+------+-----+-------------------+-------------------+
+5 rows in set (0.02 sec)
+
+mysql> DESC users;
++------------+-----------------------------------+------+-----+-------------------+-------------------+
+| Field      | Type                              | Null | Key | Default           | Extra             |
++------------+-----------------------------------+------+-----+-------------------+-------------------+
+| user_id    | bigint                            | NO   | PRI | NULL              | auto_increment    |
+| username   | varchar(50)                       | NO   | UNI | NULL              |                   |
+| password   | varchar(255)                      | NO   |     | NULL              |                   |
+| role       | enum('ADMIN','TEACHER','STUDENT') | NO   |     | NULL              |                   |
+| created_at | timestamp                         | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED |
++------------+-----------------------------------+------+-----+-------------------+-------------------+
+5 rows in set (0.01 sec)
